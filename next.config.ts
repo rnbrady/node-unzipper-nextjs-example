@@ -1,15 +1,16 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  webpack: (config) => {
-    // For unzipper (https://github.com/ZJONSSON/node-unzipper/issues/330)
-    config.resolve.alias = {
-      ...config.resolve.alias,
-      "@aws-sdk/client-s3": false,
-    };
-
-    return config;
-  },
+  webpack: (config) => ({
+    ...config,
+    resolve: {
+      ...config.resolve,
+      alias: {
+        ...config.resolve.alias,
+        "@aws-sdk/client-s3": false,
+      },
+    },
+  }),
 };
 
 export default nextConfig;
